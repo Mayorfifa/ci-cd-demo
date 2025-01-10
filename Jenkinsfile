@@ -12,17 +12,16 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    sh 'pytest || echo "Tests failed!"'
+                    sh 'docker run ci-cd-demo pytest'
                 }
             }
         }
         stage('Deploy') {
             steps {
                 script {
-                    sh 'docker run ci-cd-demo'
+                    sh 'docker run -d -p 8080:8080 ci-cd-demo'
                 }
             }
         }
     }
 }
-
